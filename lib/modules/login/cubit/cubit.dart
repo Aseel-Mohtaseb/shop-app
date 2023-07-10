@@ -42,7 +42,7 @@ class LoginCubit extends Cubit<LoginStates> {
       print('loginModel ${loginModel.toJson()}');
       print('email: ${loginModel.data?.email}');
       // value.
-      emit(LoginSuccessState());
+      emit(LoginSuccessState(loginModel));
     }).catchError((error) {
       emit(LoginErrorState(error.toString()));
     });

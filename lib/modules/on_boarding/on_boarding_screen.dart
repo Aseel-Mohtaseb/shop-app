@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/boarding_model.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../shared/components/components.dart';
 import '../../shared/styles/colors.dart';
@@ -28,13 +29,21 @@ class OnBoardingScreen extends StatelessWidget {
     ),
   ];
 
+  void leaveOnBoarding(BuildContext context) {
+    CacheHelper.saveData(key: 'onBoarding', value: true).then((value) {
+      navigateAndFinish(context, LoginScreen());
+    }).catchError((error) {
+      print(error.toString());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(actions: [
         TextButton(
             onPressed: () {
-              navigateAndFinish(context, LoginScreen());
+              leaveOnBoarding(context);
             },
             child: Text('SKIP', style: TextStyle(fontSize: 20,)))
       ]),
@@ -47,9 +56,10 @@ class OnBoardingScreen extends StatelessWidget {
                 controller: boardController,
                 physics: BouncingScrollPhysics(),
                 itemCount: boardingList.length,
-                itemBuilder: (context, index) => OnBoardingItem(
-                  boardingModel: boardingList[index],
-                ),
+                itemBuilder: (context, index) =>
+                    OnBoardingItem(
+                      boardingModel: boardingList[index],
+                    ),
                 onPageChanged: (index) {
                   if (index == boardingList.length - 1) {
                     isLast = true;
@@ -75,7 +85,7 @@ class OnBoardingScreen extends StatelessWidget {
                 FloatingActionButton(
                   onPressed: () {
                     if (isLast) {
-                      navigateAndFinish(context, LoginScreen());
+                      leaveOnBoarding(context);
                     } else {
                       boardController.nextPage(
                           duration: Duration(seconds: 1),
