@@ -6,7 +6,6 @@ import 'package:shop_app/modules/login/cubit/states.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
 class LoginScreen extends StatelessWidget {
-
   var loginFormKey = GlobalKey<FormState>();
 
   var emailController = TextEditingController();
@@ -32,20 +31,19 @@ class LoginScreen extends StatelessWidget {
                       children: [
                         Text(
                           'LOGIN',
-                          style: Theme
-                              .of(context)
+                          style: Theme.of(context)
                               .textTheme
                               .headline4!
-                              .copyWith(color: Colors.black,
-                              fontWeight: FontWeight.bold),
+                              .copyWith(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: 20,
                         ),
                         Text(
                           'Discover a world of products at your fingertips. Login and start shopping.',
-                          style: Theme
-                              .of(context)
+                          style: Theme.of(context)
                               .textTheme
                               .subtitle1!
                               .copyWith(color: Colors.grey[800]),
@@ -74,16 +72,21 @@ class LoginScreen extends StatelessWidget {
                         TextFormField(
                           controller: passwordController,
                           keyboardType: TextInputType.visiblePassword,
-                          obscureText: true,
+                          obscureText: !loginCubit.isPasswordShown,
                           validator: (value) {
                             if (value == null || value.length < 6) {
                               return 'Password should be 6 characters at least';
                             }
                             return null;
                           },
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             hintText: 'Password',
-                            prefixIcon: Icon(Icons.lock_outline),
+                            prefixIcon: const Icon(Icons.lock_outline),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  loginCubit.showHidePassword();
+                                },
+                                icon: loginCubit.passwordIcon),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -92,21 +95,21 @@ class LoginScreen extends StatelessWidget {
                         ),
                         MaterialButton(
                           onPressed: () {
-                            if (loginFormKey.currentState!.validate()){
+                            if (loginFormKey.currentState!.validate()) {
                               print('validate');
-                              loginCubit.userLogin(email: emailController.text,
+                              loginCubit.userLogin(
+                                  email: emailController.text,
                                   password: passwordController.text);
                             }
                             // print('not valid');
-
                           },
-                          child: Text(
-                            'LOGIN',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
                           color: defaultColor,
                           minWidth: double.infinity,
                           height: 50,
+                          child: state is LoginLoadingState ? const CircularProgressIndicator(color: Colors.white,) : const Text(
+                            'LOGIN',
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
                         ),
                         SizedBox(
                           height: 10,
