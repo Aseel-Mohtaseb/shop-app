@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:shop_app/models/Boarding_Model.dart';
+import 'package:shop_app/models/boarding_model.dart';
 
 class OnBoardingItem extends StatelessWidget {
   BoardingModel boardingModel;
