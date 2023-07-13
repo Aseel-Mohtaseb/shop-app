@@ -37,10 +37,8 @@ class LoginCubit extends Cubit<LoginStates> {
       'email': email,
       'password': password,
     }).then((value) {
-      print('value: $value');
       loginModel = LoginModel.fromJson(value.data);
       print('loginModel ${loginModel.toJson()}');
-      print('email: ${loginModel.data?.email}');
       // value.
       emit(LoginSuccessState(loginModel));
     }).catchError((error) {
