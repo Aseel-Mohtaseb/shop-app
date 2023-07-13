@@ -7,9 +7,9 @@ class DioHelper {
   static init() {
     dio = Dio(
       BaseOptions(
-          baseUrl: baseUrl,
-          receiveDataWhenStatusError: true,
-          headers: {'Content-Type': 'application/json'}),
+        baseUrl: baseUrl,
+        receiveDataWhenStatusError: true,
+      ),
     );
   }
 
@@ -20,6 +20,7 @@ class DioHelper {
     String? token,
   }) async {
     dio.options.headers = {
+      'Content-Type': 'application/json',
       'lang': lang,
       'Authorization': token,
     };
@@ -34,6 +35,7 @@ class DioHelper {
     String? token,
   }) async {
     dio.options.headers = {
+      'Content-Type': 'application/json',
       'lang': lang,
       'Authorization': token,
     };
