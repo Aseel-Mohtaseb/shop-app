@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/modules/login/cubit/cubit.dart';
 import 'package:shop_app/modules/login/cubit/states.dart';
+import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -25,15 +26,7 @@ class LoginScreen extends StatelessWidget {
               }
               else {
               print(state.loginModel.message);
-              Fluttertoast.showToast(
-                  msg: state.loginModel.message,
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 5,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0
-              );
+              showToast(meg: state.loginModel.message, toastState: ToastStates.error);
             }
           }
         },
@@ -95,8 +88,8 @@ class LoginScreen extends StatelessWidget {
                           keyboardType: TextInputType.visiblePassword,
                           obscureText: !loginCubit.isPasswordShown,
                           validator: (value) {
-                            if (value == null || value.length < 6) {
-                              return 'Password should be 6 characters at least';
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
                             }
                             return null;
                           },
