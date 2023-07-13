@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/layout/layout.dart';
 import 'package:shop_app/modules/login/cubit/cubit.dart';
 import 'package:shop_app/modules/login/cubit/states.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/components/constants.dart';
+import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/styles/colors.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -23,6 +26,11 @@ class LoginScreen extends StatelessWidget {
             {
               if(state.loginModel.status){
                 print(state.loginModel.message);
+                CacheHelper.saveData(key: 'token', value: state.loginModel.data?.token).then((value) {
+                  token = state.loginModel.data?.token;
+                  navigateAndFinish(context, LayoutScreen());
+
+                });
               }
               else {
               print(state.loginModel.message);
