@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
             ? Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CarouselSlider(
                         items: shopCubit.homeModel?.data.banners.map((element) {
@@ -35,11 +36,17 @@ class HomeScreen extends StatelessWidget {
                           enableInfiniteScroll: true,
                           reverse: false,
                           autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration: Duration(milliseconds: 800),
+                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayAnimationDuration: const Duration(milliseconds: 800),
                           autoPlayCurve: Curves.fastOutSlowIn,
                           scrollDirection: Axis.horizontal,
                         )),
+                    const Text('Categories', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
+                    // ListView.builder(
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //
+                    //   },),
+                    const Text('Products', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
                     Container(
                       color: Colors.grey[300],
                       child: GridView.count(
@@ -49,8 +56,6 @@ class HomeScreen extends StatelessWidget {
                         crossAxisSpacing: 2,
                         mainAxisSpacing: 2,
                         childAspectRatio: 1 / 1.48,
-
-
                         children: List.generate(
                             shopCubit.homeModel!.data.products.length,
                                 (index) => HomeProductItem(productModel: shopCubit.homeModel!.data.products[index],)),
