@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CarouselSlider(
-                        items: shopCubit.homeModel?.data.banners.map((element) {
+                        items: shopCubit.homeModel!.data.banners.map((element) {
                           return Image(
                             image: NetworkImage(element.image),
                             width: double.infinity,
@@ -39,9 +39,9 @@ class HomeScreen extends StatelessWidget {
                           enableInfiniteScroll: true,
                           reverse: false,
                           autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayInterval:  Duration(seconds: 3),
                           autoPlayAnimationDuration:
-                              const Duration(milliseconds: 800),
+                               Duration(milliseconds: 800),
                           autoPlayCurve: Curves.fastOutSlowIn,
                           scrollDirection: Axis.horizontal,
                         )),
