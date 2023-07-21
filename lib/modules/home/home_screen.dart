@@ -6,6 +6,8 @@ import 'package:shop_app/layout/cubit/cubit.dart';
 import 'package:shop_app/layout/cubit/states.dart';
 import 'package:shop_app/modules/home/home_product_item.dart';
 
+import 'home_category_item.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -15,11 +17,12 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var shopCubit = ShopCubit.get(context);
+
         return shopCubit.homeModel == null
             ? Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CarouselSlider(
                         items: shopCubit.homeModel?.data.banners.map((element) {
@@ -37,16 +40,41 @@ class HomeScreen extends StatelessWidget {
                           reverse: false,
                           autoPlay: true,
                           autoPlayInterval: const Duration(seconds: 3),
-                          autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 800),
                           autoPlayCurve: Curves.fastOutSlowIn,
                           scrollDirection: Axis.horizontal,
                         )),
-                    const Text('Categories', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
-                    // ListView.builder(
-                    //   itemBuilder: (BuildContext context, int index) {
-                    //
-                    //   },),
-                    const Text('Products', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Categories',
+                            style:
+                                TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                          ),
+                          Container(
+                            height: 80,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) =>
+                                  HomeCategoryItem(
+                                    dataModel: shopCubit.categoriesModel!.data.data[index],
+                                  ),
+                              separatorBuilder: (BuildContext context, int index) => SizedBox(width: 10,) ,
+                              itemCount: shopCubit.categoriesModel!.data.data.length,
+                            ),
+                          ),
+                          const Text(
+                            'Products',
+                            style:
+                            TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
                     Container(
                       color: Colors.grey[300],
                       child: GridView.count(
@@ -58,12 +86,15 @@ class HomeScreen extends StatelessWidget {
                         childAspectRatio: 1 / 1.48,
                         children: List.generate(
                             shopCubit.homeModel!.data.products.length,
-                                (index) => HomeProductItem(productModel: shopCubit.homeModel!.data.products[index],)),
+                            (index) => HomeProductItem(
+                                  productModel:
+                                      shopCubit.homeModel!.data.products[index],
+                                )),
                       ),
                     ),
                   ],
                 ),
-            );
+              );
       },
     );
   }
