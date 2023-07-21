@@ -16,10 +16,24 @@ class HomeProductItem extends StatelessWidget {
         padding: const EdgeInsets.all(4.0),
         child: Column(
           children: [
-            Image(
-              image: NetworkImage(productModel.image),
-              height: 200,
-              width: double.infinity,
+            Stack(
+              alignment: AlignmentDirectional.bottomEnd,
+              children: [
+                Image(
+                  image: NetworkImage(productModel.image),
+                  height: 200,
+                  width: double.infinity,
+                ),
+                if (productModel.discount != 0)
+                  Container(
+                    color: Colors.red,
+                    padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    child: Text(
+                      'Discount',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(top: 6, right: 6, left: 6),
@@ -34,7 +48,6 @@ class HomeProductItem extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.w600, height: 1.2, fontSize: 16),
                   ),
-
                   Row(
                     children: [
                       Text(
@@ -48,15 +61,15 @@ class HomeProductItem extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      Text(
-                        productModel.oldPrice.toString(),
-                        style: TextStyle(
-                          color: Colors.grey[800],
-                          // fontWeight: FontWeight.w600,
-                          fontSize: 12,
-                          decoration: TextDecoration.lineThrough
+                      if (productModel.discount != 0)
+                        Text(
+                          productModel.oldPrice.toString(),
+                          style: TextStyle(
+                              color: Colors.grey[800],
+                              // fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              decoration: TextDecoration.lineThrough),
                         ),
-                      ),
                       Spacer(),
                       IconButton(
                           onPressed: () {}, icon: Icon(Icons.favorite_border)),
