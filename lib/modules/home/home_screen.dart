@@ -45,8 +45,9 @@ class HomeScreen extends StatelessWidget {
                           autoPlayCurve: Curves.fastOutSlowIn,
                           scrollDirection: Axis.horizontal,
                         )),
+                    SizedBox(height: 10,),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -67,6 +68,7 @@ class HomeScreen extends StatelessWidget {
                               itemCount: shopCubit.categoriesModel!.data.data.length,
                             ),
                           ),
+                          SizedBox(height: 10,),
                           const Text(
                             'Products',
                             style:

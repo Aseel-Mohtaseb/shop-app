@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/layout/layout.dart';
 import 'package:shop_app/modules/login/login_screen.dart';
+import 'package:shop_app/shared/components/constants.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/styles/themes.dart';
@@ -14,7 +15,7 @@ void main() async {
   Widget startWidget;
 
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
-  String? token = CacheHelper.getData(key: 'token');
+  token = CacheHelper.getData(key: 'token');
   print('${onBoarding.toString()}   ${token.toString()}');
   if(onBoarding != null){
     if(token == null ){

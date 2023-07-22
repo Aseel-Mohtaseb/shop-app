@@ -15,3 +15,10 @@ class ShopGetCategoriesDataLoadingState extends ShopStates {}
 class ShopGetCategoriesDataSuccessState extends ShopStates {}
 
 class ShopGetCategoriesDataErrorState extends ShopStates {}
+
+class ShopGetFavoritesDataLoadingState extends ShopStates {}
+
+class ShopGetFavoritesDataSuccessState extends ShopStates {}
+
+class ShopGetFavoritesDataErrorState extends ShopStates {}
+

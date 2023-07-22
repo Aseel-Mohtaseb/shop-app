@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../models/home_model.dart';
 
-class HomeProductItem extends StatelessWidget {
-  ProductModel productModel;
+import '../../models/favorites_model.dart';
 
-  HomeProductItem({required this.productModel});
+class FavoriteItem extends StatelessWidget {
+  Product favProduct;
+
+  FavoriteItem({required this.favProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +20,11 @@ class HomeProductItem extends StatelessWidget {
               alignment: AlignmentDirectional.bottomEnd,
               children: [
                 Image(
-                  image: NetworkImage(productModel.image),
+                  image: NetworkImage(favProduct.image),
                   height: 200,
                   width: double.infinity,
                 ),
-                if (productModel.discount != 0)
+                if (favProduct.discount != 0)
                   Container(
                     color: Colors.red,
                     padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -40,7 +42,7 @@ class HomeProductItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    productModel.name,
+                    favProduct.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -49,7 +51,7 @@ class HomeProductItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        productModel.price.toString(),
+                        favProduct.price.toString(),
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.w600,
@@ -59,9 +61,9 @@ class HomeProductItem extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      if (productModel.discount != 0)
+                      if (favProduct.discount != 0)
                         Text(
-                          productModel.oldPrice.toString(),
+                          favProduct.oldPrice.toString(),
                           style: TextStyle(
                               color: Colors.grey[800],
                               // fontWeight: FontWeight.w600,

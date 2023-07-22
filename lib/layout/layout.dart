@@ -6,15 +6,13 @@ import 'package:shop_app/modules/login/login_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/network/local/cache_helper.dart';
 
-import '../modules/home/home_screen.dart';
-
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => ShopCubit()..getHomeData()..getCategoriesData(),
+      create: (BuildContext context) => ShopCubit()..getHomeData()..getCategoriesData()..getFavorite(),
       child: BlocConsumer<ShopCubit, ShopStates>(
         listener: (context, state) {},
         builder: (context, state) {
