@@ -7,7 +7,6 @@ import 'package:shop_app/modules/favorites/favorites_screen.dart';
 import 'package:shop_app/modules/home/home_screen.dart';
 import 'package:shop_app/modules/settings/settings_screen.dart';
 import 'package:shop_app/shared/components/constants.dart';
-import 'package:shop_app/shared/network/local/cache_helper.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 import 'package:shop_app/shared/network/remote/end_points.dart';
 
@@ -44,7 +43,7 @@ class ShopCubit extends Cubit<ShopStates> {
     DioHelper.getData(url: HOME, token: token).then((value) {
       homeModel = HomeModel.fromJson(value.data);
       homeModel?.data.products.forEach((element) {
-        favorites.addAll({element.id : element.inFavorites});
+        favorites.addAll({element.id: element.inFavorites});
       });
       print(homeModel?.data.banners[0].image);
       print(homeModel?.data.products[1].toJson().toString());
@@ -106,19 +105,39 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-
   ProfileModel? profileModel;
 
   void getProfileData() {
     emit(ShopGetProfileDataLoadingState());
     DioHelper.getData(url: PROFILE, token: token).then((value) {
       profileModel = ProfileModel.fromJson(value.data);
-      print('user email: ${profileModel!.data.email}');
+      print('user email: ${profileModel!.data!.email}');
 
       emit(ShopGetProfileDataSuccessState());
     }).catchError((error) {
       print(error.toString());
       emit(ShopGetProfileDataErrorState());
+    });
+  }
+
+  void updateProfileData({required name, required email, required phone}) {
+    emit(ShopUpdateProfileDataLoadingState());
+    DioHelper.putData(
+      url: UPDATE_PROFILE,
+      token: token,
+      data: {
+        'name' : name,
+        'email' : email,
+        'phone' : phone,
+      },
+    ).then((value) {
+      profileModel = ProfileModel.fromJson(value.data);
+      print('user email: ${profileModel!.data!.email}');
+
+      emit(ShopUpdateProfileDataSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(ShopUpdateProfileDataErrorState());
     });
   }
 }

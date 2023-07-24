@@ -1,7 +1,7 @@
 class ProfileModel {
   late bool status;
   String? message;
-  late Data data;
+  Data? data;
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];

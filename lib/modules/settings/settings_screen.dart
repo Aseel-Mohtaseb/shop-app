@@ -19,11 +19,10 @@ class SettingsScreen extends StatelessWidget {
     return BlocConsumer<ShopCubit, ShopStates>(
       listener: (BuildContext context, ShopStates state) {},
       builder: (BuildContext context, ShopStates state) {
-
         var shopCubit = ShopCubit.get(context);
-        nameController.text = shopCubit.profileModel!.data.name;
-        emailController.text = shopCubit.profileModel!.data.email;
-        phoneController.text = shopCubit.profileModel!.data.phone;
+        nameController.text = shopCubit.profileModel!.data!.name;
+        emailController.text = shopCubit.profileModel!.data!.email;
+        phoneController.text = shopCubit.profileModel!.data!.phone;
 
         return SingleChildScrollView(
           child: Padding(
@@ -33,12 +32,18 @@ class SettingsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextFormField(
-                    controller: nameController,
+                  if(state is ShopUpdateProfileDataLoadingState)
+                    LinearProgressIndicator(),
+                  SizedBox(height: 20,),
+                  TextFormField
+                    (
+                    controller
+                        :
+                    nameController,
                     keyboardType: TextInputType.text,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Name can\'t be empty' ;
+                        return 'Name can\'t be empty';
                       }
                       return null;
                     },
@@ -90,10 +95,10 @@ class SettingsScreen extends StatelessWidget {
                   MaterialButton(
                     onPressed: () {
                       if (settingsFormKey.currentState!.validate()) {
-                        print('validate');
-
+                        shopCubit.updateProfileData(name: nameController.text,
+                            email: emailController.text,
+                            phone: phoneController.text);
                       }
-                      // print('not valid');
                     },
                     color: defaultColor,
                     minWidth: double.infinity,
@@ -109,8 +114,8 @@ class SettingsScreen extends StatelessWidget {
 
                 ],
               ),
-            ),
-          ),
+            ),)
+          ,
         );;
       },
     );

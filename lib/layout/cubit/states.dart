@@ -34,3 +34,8 @@ class ShopGetProfileDataSuccessState extends ShopStates {}
 
 class ShopGetProfileDataErrorState extends ShopStates {}
 
+class ShopUpdateProfileDataLoadingState extends ShopStates {}
+
+class ShopUpdateProfileDataSuccessState extends ShopStates {}
+
+class ShopUpdateProfileDataErrorState extends ShopStates {}
