@@ -10,5 +10,7 @@ const FAVORITES = 'favorites';
 
 const CHANGE_FAVORITES = 'favorites';
 
+const PROFILE = 'profile';
+
 
 

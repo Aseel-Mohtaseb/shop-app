@@ -14,6 +14,7 @@ import 'package:shop_app/shared/network/remote/end_points.dart';
 import '../../models/categories_model.dart';
 import '../../models/change_fav_model.dart';
 import '../../models/favorites_model.dart';
+import '../../models/profile_model.dart';
 
 class ShopCubit extends Cubit<ShopStates> {
   ShopCubit() : super(ShopInitialState());
@@ -77,11 +78,7 @@ class ShopCubit extends Cubit<ShopStates> {
 
       favoritesModel = FavoritesModel.fromJson(value.data);
 
-
-      print(FavoritesModel.fromJson(value.data).toString());
       print('total fav number: ${favoritesModel!.data.total}');
-      print('total fav number: ${favoritesModel!.status}');
-
       emit(ShopGetFavoritesDataSuccessState());
     }).catchError((error) {
       print(error.toString());
@@ -106,6 +103,22 @@ class ShopCubit extends Cubit<ShopStates> {
     }).catchError((error) {
       print(error.toString());
       emit(ShopChangeFavoritesErrorState());
+    });
+  }
+
+
+  ProfileModel? profileModel;
+
+  void getProfileData() {
+    emit(ShopGetProfileDataLoadingState());
+    DioHelper.getData(url: PROFILE, token: token).then((value) {
+      profileModel = ProfileModel.fromJson(value.data);
+      print('user email: ${profileModel!.data.email}');
+
+      emit(ShopGetProfileDataSuccessState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(ShopGetProfileDataErrorState());
     });
   }
 }
