@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/layout/cubit/cubit.dart';
 import '../../models/home_model.dart';
 
 class HomeProductItem extends StatelessWidget {
@@ -70,7 +71,12 @@ class HomeProductItem extends StatelessWidget {
                         ),
                       Spacer(),
                       IconButton(
-                          onPressed: () {}, icon: Icon(Icons.favorite_border)),
+                          onPressed: () {
+                            ShopCubit.get(context).changeFav(productModel.id);
+                          },
+                          icon: ShopCubit.get(context).favorites[productModel.id] == true
+                              ? Icon(Icons.favorite)
+                              : Icon(Icons.favorite_border)),
                     ],
                   ),
                 ],

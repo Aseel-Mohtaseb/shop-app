@@ -8,3 +8,7 @@ const CATEGORIES = 'categories';
 
 const FAVORITES = 'favorites';
 
+const CHANGE_FAVORITES = 'favorites';
+
+
+

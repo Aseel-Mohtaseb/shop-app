@@ -1,6 +1,6 @@
 class FavoritesModel {
   late bool status;
-  late String message;
+  String? message;
   late Data data;
 
   FavoritesModel.fromJson(Map<String, dynamic> json) {
@@ -17,10 +17,10 @@ class Data {
   late int from;
   late int lastPage;
   late String lastPageUrl;
-  late String nextPageUrl;
+  String? nextPageUrl;
   late String path;
   late int perPage;
-  late String prevPageUrl;
+  String? prevPageUrl;
   late int to;
   late int total;
 

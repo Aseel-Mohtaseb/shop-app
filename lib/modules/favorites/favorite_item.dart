@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/layout/cubit/cubit.dart';
 
 import '../../models/favorites_model.dart';
 
@@ -14,15 +15,15 @@ class FavoriteItem extends StatelessWidget {
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: Column(
+        child: Row(
           children: [
             Stack(
               alignment: AlignmentDirectional.bottomEnd,
               children: [
                 Image(
                   image: NetworkImage(favProduct.image),
-                  height: 200,
-                  width: double.infinity,
+                  height: 180,
+                  width: 180,
                 ),
                 if (favProduct.discount != 0)
                   Container(
@@ -35,47 +36,53 @@ class FavoriteItem extends StatelessWidget {
                   ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 6, right: 6, left: 6),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    favProduct.name,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, height: 1.2, fontSize: 16),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        favProduct.price.toString(),
-                        style: TextStyle(
-                          color: Colors.blue,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 6, right: 6, left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      favProduct.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      if (favProduct.discount != 0)
+                          height: 1.2,
+                          fontSize: 16),
+                    ),
+                    Row(
+                      children: [
                         Text(
-                          favProduct.oldPrice.toString(),
+                          favProduct.price.toString(),
                           style: TextStyle(
-                              color: Colors.grey[800],
-                              // fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              decoration: TextDecoration.lineThrough),
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
                         ),
-                      Spacer(),
-                      IconButton(
-                          onPressed: () {}, icon: Icon(Icons.favorite_border)),
-                    ],
-                  ),
-                ],
+                        SizedBox(
+                          width: 10,
+                        ),
+                        if (favProduct.discount != 0)
+                          Text(
+                            favProduct.oldPrice.toString(),
+                            style: TextStyle(
+                                color: Colors.grey[800],
+                                fontSize: 12,
+                                decoration: TextDecoration.lineThrough),
+                          ),
+                        Spacer(),
+                        IconButton(
+                            onPressed: () {
+                              ShopCubit.get(context).changeFav(favProduct.id);
+                            },
+                            icon: Icon(Icons.favorite)),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
