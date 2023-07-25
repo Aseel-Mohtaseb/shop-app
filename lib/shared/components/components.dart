@@ -9,10 +9,13 @@ void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
       (route) => false,
     );
 
+void navigateTo(context, widget) =>
+    Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
+
 void showToast({
   required String meg,
   required ToastStates toastState,
-}){
+}) {
   Fluttertoast.showToast(
       msg: meg,
       toastLength: Toast.LENGTH_LONG,
@@ -20,15 +23,14 @@ void showToast({
       timeInSecForIosWeb: 5,
       backgroundColor: chooseToastColor(toastState),
       textColor: Colors.white,
-      fontSize: 16.0
-  );
+      fontSize: 16.0);
 }
 
-enum ToastStates {success, error, warning}
+enum ToastStates { success, error, warning }
 
-Color chooseToastColor(ToastStates toastState){
+Color chooseToastColor(ToastStates toastState) {
   Color toastColor;
-  switch(toastState){
+  switch (toastState) {
     case ToastStates.success:
       toastColor = Colors.green;
       break;
@@ -42,14 +44,13 @@ Color chooseToastColor(ToastStates toastState){
   return toastColor;
 }
 
-
 Widget myDivider() => Padding(
-  padding: const EdgeInsetsDirectional.only(
-    start: 20.0,
-  ),
-  child: Container(
-    width: double.infinity,
-    height: 1.0,
-    color: Colors.grey[300],
-  ),
-);
+      padding: const EdgeInsetsDirectional.only(
+        start: 20.0,
+      ),
+      child: Container(
+        width: double.infinity,
+        height: 1.0,
+        color: Colors.grey[300],
+      ),
+    );

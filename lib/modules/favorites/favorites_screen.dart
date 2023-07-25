@@ -20,7 +20,7 @@ class FavoritesScreen extends StatelessWidget {
               :
             ListView.separated(
                   itemBuilder: (context, index) => FavoriteItem(
-                      favProduct: shopCubit
+                      product: shopCubit
                           .favoritesModel!.data.favoritesData[index].product),
                   separatorBuilder: (context, index) => myDivider(),
                   itemCount:

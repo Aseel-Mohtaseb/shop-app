@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/layout/cubit/cubit.dart';
 
 import '../../models/favorites_model.dart';
 
 class FavoriteItem extends StatelessWidget {
-  Product favProduct;
+  var product;
+  bool search;
 
-  FavoriteItem({required this.favProduct});
+  FavoriteItem({required this.product, this.search = false});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,11 @@ class FavoriteItem extends StatelessWidget {
               alignment: AlignmentDirectional.bottomEnd,
               children: [
                 Image(
-                  image: NetworkImage(favProduct.image),
+                  image: NetworkImage(product.image),
                   height: 180,
                   width: 180,
                 ),
-                if (favProduct.discount != 0)
+                if (product.discount != 0 && !search)
                   Container(
                     color: Colors.red,
                     padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -44,7 +44,7 @@ class FavoriteItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      favProduct.name,
+                      product.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -55,7 +55,7 @@ class FavoriteItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          favProduct.price.toString(),
+                          product.price.toString(),
                           style: TextStyle(
                             color: Colors.blue,
                             fontWeight: FontWeight.w600,
@@ -65,20 +65,21 @@ class FavoriteItem extends StatelessWidget {
                         SizedBox(
                           width: 10,
                         ),
-                        if (favProduct.discount != 0)
+                        if (product.discount != 0 && !search)
                           Text(
-                            favProduct.oldPrice.toString(),
+                            product.oldPrice.toString(),
                             style: TextStyle(
                                 color: Colors.grey[800],
                                 fontSize: 12,
                                 decoration: TextDecoration.lineThrough),
                           ),
                         Spacer(),
-                        IconButton(
-                            onPressed: () {
-                              ShopCubit.get(context).changeFav(favProduct.id);
-                            },
-                            icon: Icon(Icons.favorite)),
+                        if (!search)
+                          IconButton(
+                              onPressed: () {
+                                ShopCubit.get(context).changeFav(product.id);
+                              },
+                              icon: Icon(Icons.favorite)),
                       ],
                     ),
                   ],

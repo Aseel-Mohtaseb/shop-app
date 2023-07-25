@@ -83,7 +83,7 @@ class RegisterScreen extends StatelessWidget {
                           },
                           decoration: const InputDecoration(
                             hintText: 'Name',
-                            prefixIcon: Icon(Icons.email_outlined),
+                            prefixIcon: Icon(Icons.person),
                             border: OutlineInputBorder(),
                           ),
                         ),
@@ -143,7 +143,7 @@ class RegisterScreen extends StatelessWidget {
                           },
                           decoration: const InputDecoration(
                             hintText: 'Phone',
-                            prefixIcon: Icon(Icons.email_outlined),
+                            prefixIcon: Icon(Icons.phone),
                             border: OutlineInputBorder(),
                           ),
                         ),
