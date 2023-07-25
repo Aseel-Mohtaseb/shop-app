@@ -4,7 +4,7 @@ import 'package:shop_app/modules/search/cubit/cubit.dart';
 import 'package:shop_app/modules/search/cubit/states.dart';
 
 import '../../shared/components/components.dart';
-import '../favorites/favorite_item.dart';
+import '../favorites/peoduct_item.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({Key? key}) : super(key: key);
