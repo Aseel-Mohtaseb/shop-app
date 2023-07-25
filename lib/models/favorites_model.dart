@@ -14,14 +14,14 @@ class Data {
   late int currentPage;
   List<FavoritesData> favoritesData = [];
   late String firstPageUrl;
-  late int from;
+  int? from;
   late int lastPage;
   late String lastPageUrl;
   String? nextPageUrl;
   late String path;
   late int perPage;
   String? prevPageUrl;
-  late int to;
+  int? to;
   late int total;
 
   Data.fromJson(Map<String, dynamic> json) {

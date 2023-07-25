@@ -14,13 +14,18 @@ class FavoritesScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           var shopCubit = ShopCubit.get(context);
-          return ListView.separated(
-            itemBuilder: (context, index) => FavoriteItem(
-                favProduct: shopCubit
-                    .favoritesModel!.data.favoritesData[index].product),
-            separatorBuilder: (context, index) => myDivider(),
-            itemCount: shopCubit.favoritesModel!.data.favoritesData.length,
-          );
+          return
+            shopCubit.favoritesModel == null || shopCubit.favoritesModel!.data.favoritesData.isEmpty
+              ? Text('you don\'t have favorites right now')
+              :
+            ListView.separated(
+                  itemBuilder: (context, index) => FavoriteItem(
+                      favProduct: shopCubit
+                          .favoritesModel!.data.favoritesData[index].product),
+                  separatorBuilder: (context, index) => myDivider(),
+                  itemCount:
+                      shopCubit.favoritesModel!.data.favoritesData.length,
+                );
         });
   }
 }
