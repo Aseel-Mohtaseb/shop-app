@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         crossAxisSpacing: 2,
                         mainAxisSpacing: 2,
-                        childAspectRatio: 1 / 1.48,
+                        childAspectRatio: 1 / 1.55,
                         children: List.generate(
                             shopCubit.homeModel!.data.products.length,
                             (index) => HomeProductItem(
