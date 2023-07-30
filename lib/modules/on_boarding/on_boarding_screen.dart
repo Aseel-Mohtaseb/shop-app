@@ -14,18 +14,18 @@ class OnBoardingScreen extends StatelessWidget {
   List<BoardingModel> boardingList = [
     BoardingModel(
       image: 'assets/images/on_boarding1.png',
-      title: 'board 1 title',
-      body: 'board 1 body',
+      title: 'With Go Cart',
+      body: 'Browse products easily',
     ),
     BoardingModel(
-      image: 'assets/images/on_boarding1.png',
-      title: 'board 2 title',
-      body: 'board 2 body',
+      image: 'assets/images/on_boarding2.png',
+      title: 'With Go Cart',
+      body: 'Purchase your needs',
     ),
     BoardingModel(
-      image: 'assets/images/on_boarding1.png',
-      title: 'board 3 title',
-      body: 'board 3 body',
+      image: 'assets/images/on_boarding3.png',
+      title: 'With Go Cart',
+      body: 'Add your favorite products',
     ),
   ];
 
